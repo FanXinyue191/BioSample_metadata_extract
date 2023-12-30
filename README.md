@@ -10,7 +10,11 @@ Download the biosample_set.xml.gz
 ```
 wget https://ftp.ncbi.nlm.nih.gov/biosample/biosample_set.xml.gz
 ```
-
+Gunzip the .gz file
 ```
 gunzip biosample_set.xml.gz
+```
+Run biosample_extractV4.0.py
+```
+python biosample_extractV4.0.py -i biosample_set.xml.gz -o biosample_extractV4.0.tsv
 ```
