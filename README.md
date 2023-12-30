@@ -6,11 +6,11 @@ NCBI BioSample website：https://www.ncbi.nlm.nih.gov/biosample/?term=
 BioSample XML download website：https://ftp.ncbi.nlm.nih.gov/biosample/biosample_set.xml.gz
 
 # Usage
-Download the biosample_set.xml.gz
+Download the biosample_set.xml.gz (~2.6G)
 ```
 wget https://ftp.ncbi.nlm.nih.gov/biosample/biosample_set.xml.gz
 ```
-Gunzip the .gz file
+Gunzip the .gz file (~95G)
 ```
 gunzip biosample_set.xml.gz
 ```
