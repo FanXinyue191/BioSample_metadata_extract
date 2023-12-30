@@ -1,16 +1,21 @@
 import re
 import xml.sax
+import argparse
 from time import *
-
-begin_time = time()
 
 
 class BiosampleHandler(xml.sax.ContentHandler):
     # 创建一个BiosampleHandler类，继承xml.sax.ContentHandler类
     # 实现了它的 startElement()，endElement() 以及 characters()方法
-    def __init__(self):
+    def __init__(self,output):
         self.CurrentData = ""
         self.n = ""
+        self.output = output
+    # 文档启动的时候调用
+    def startDocument(self):
+        self.__title = "Biosample_accession\tTitle\tPackage\tHost\ttaxonomy_id\ttaxonomy_name\tisolation_source\tgeo_loc_name\tcollection_date\tBacterial Vaginosis\tsample_type\thost_disease\n"
+        with open(self.output, "w", encoding="utf-8", errors="ignore") as biosample_extract:
+            biosample_extract.writelines(self.__title)
 
     # 元素开始事件处理
     def startElement(self, tag, attributes):
@@ -56,7 +61,7 @@ class BiosampleHandler(xml.sax.ContentHandler):
         # tag表示标签的名字
         self.n = ""
         if tag == "BioSample":
-            with open("biosample_extractV4.0", "a", encoding="utf-8", errors="ignore") as biosample_extract:
+            with open(self.output, "a", encoding="utf-8", errors="ignore") as biosample_extract:
                 biosample_extract.writelines(
                 re.sub("[\t\n]","",self.dic["Biosample_accession"])+"\t"+
                 re.sub("[\t\n]","",self.dic["Title"])+"\t"+
@@ -98,22 +103,26 @@ class BiosampleHandler(xml.sax.ContentHandler):
             self.dic["host_disease"] = content
 
 
-# if (__name__ == "__main__"):
-# 创建一个 XMLReader
-parser = xml.sax.make_parser()
+def main():
+    parser = argparse.ArgumentParser(description="A script that can extract infomation of interest from NCBI BioSample database")
+    parser.add_argument('--input', help="eg, biosample_set.xml", required=True)
+    parser.add_argument('--output', help="eg, biosample_extract.tsv", required=True)
+    argv = parser.parse_args()
 
-# turn off namepsaces
-parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+    # 创建一个 XMLReader
+    parser = xml.sax.make_parser()
+    # turn off namepsaces
+    parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+    # 重写 ContextHandler
+    Handler = BiosampleHandler(argv.output)
+    # 设置当前的ContentHandler为我们自己写的handler实例。如果不进行设置，content 事件会被忽略。
+    parser.setContentHandler(Handler)
+    # 开始解析 xml文件。
+    parser.parse(argv.input)
 
-# 重写 ContextHandler
-Handler = BiosampleHandler()
 
-# 设置当前的ContentHandler为我们自己写的handler实例。如果不进行设置，content 事件会被忽略。
-parser.setContentHandler(Handler)
-
-# 开始解析 xml文件。
-parser.parse("biosample_set.xml")
-
-end_time = time()
-run_time = end_time - begin_time
-print("RUN TIME:", run_time)
+if (__name__ == "__main__"):
+    begin_time = time()
+    main()
+    end_time = time()
+    print("RUN TIME:", end_time - begin_time)
