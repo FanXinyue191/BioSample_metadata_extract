@@ -1,0 +1,6 @@
+Biosample_accession	Title	Package	Host	taxonomy_id	taxonomy_name	isolation_source	geo_loc_name	collection_date	Bacterial Vaginosis	sample_type	host_disease
+SAMN00000002	Alistipes putredinis DSM 17216	MIGS.ba.6.0	Homo sapiens	445970	Alistipes putredinis DSM 17216	missing	not determined	not determined			
+SAMN00000003	Anaerotruncus colihominis DSM 17241	MIGS.ba.6.0	Homo sapiens	445972	Anaerotruncus colihominis DSM 17241	missing	not determined	not determined			
+SAMN00000004	MIGS Cultured Bacterial/Archaeal sample from Bacteroides stercoris ATCC 43183	MIGS.ba.6.0	Homo sapiens	449673	Bacteroides stercoris ATCC 43183	missing	not determined	not determined			
+SAMN00000005	Generic sample from Biomphalaria glabrata	Generic.1.0		6526	Biomphalaria glabrata						
+SAMN00000006	Generic sample from Callithrix jacchus	Generic.1.0		9483	Callithrix jacchus						
