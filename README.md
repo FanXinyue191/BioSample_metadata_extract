@@ -16,5 +16,5 @@ gunzip biosample_set.xml.gz
 ```
 Run biosample_extractV4.0.py
 ```
-python biosample_extractV4.0.py --input biosample_set.xml.gz --output biosample_extractV4.0.tsv
+python biosample_extractV4.0.py --input biosample_set.xml --output biosample_extractV4.0.tsv
 ```
